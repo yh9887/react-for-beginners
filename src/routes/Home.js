@@ -1,5 +1,6 @@
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Movie from "../components/Movie"
+import "./Home.css"
 
 function Home() {
 
@@ -10,6 +11,7 @@ function Home() {
             `https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year`
         )
         ).json();
+        console.log("🚀 ~ file: Home.js:13 ~ getMovies ~ json:", json)
         setMovies(json.data.movies);
         setLoading(false);
     };
@@ -17,24 +19,27 @@ function Home() {
         getMovies();
     }, []);
     return (
-        <div>
+        <section className="container">
             {loading ? (
-                <h1>Loading...</h1>
+                <div className="loader">
+                    <span className="loader__text">Loading...</span>
+                </div>
             ) : (
-                <div>
-                    {movies.map((movie) => (
+                <div className="movies">
+                    {movies.map(movie => (
                         <Movie
                             key={movie.id}
                             id={movie.id}
-                            coverImg={movie.medium_cover_image}
+                            year={movie.year}
                             title={movie.title}
                             summary={movie.summary}
+                            poster={movie.medium_cover_image}
                             genres={movie.genres}
                         />
                     ))}
                 </div>
             )}
-        </div>
-    )
+        </section>
+    );
 }
 export default Home;

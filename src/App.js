@@ -9,8 +9,8 @@ import Detail from "./routes/Detail";
 function App() {
   return <Router>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/movie/:id" element={<Detail />} />
+            <Route path="/react-for-beginners" element={<Home />} />
+            <Route path="/react-for-beginners/movie/:id" element={<Detail />} />
           </Routes>
         </Router>
   
